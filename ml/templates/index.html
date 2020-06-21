@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+<title>Data</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Bluesky template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center">
+						<div class="logo">
+							<a href="#"><img src="{% static 'images/logo.png' %}" alt=""></a>
+						</div>
+						<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu trans_500">
+		<div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+			<div class="menu_close_container"><div class="menu_close"></div></div>
+			<div class="logo menu_logo">
+				<a href="#">
+					<div class="logo_container d-flex flex-row align-items-start justify-content-start">
+						<div class="logo_image"><div><img src="{% static 'images/logo.png' %}" alt=""></div></div>
+					</div>
+				</a>
+			</div>
+			<ul>
+				<li class="menu_item"><a href="index.html">Home</a></li>
+				<li class="menu_item"><a href="about.html">About us</a></li>
+				<li class="menu_item"><a href="#">Tickets</a></li>
+				
+				
+			</ul>
+		</div>
+		
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+
+		<!-- Home Slider -->
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_3.jpg' %}"></div>
+					<div class="slide_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="slide_content">
+										<div class="home_title" style="color:white; margin: auto;" >Welcome Dinislam Oraz</div>
+										<div class="home_title" style="color: white; font-size: 30px">Find movie with us</div>
+										<div class="button recent_button"><a href="#data">see more</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Recent -->
+
+	<div class="recent">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title">Recent Properties</div>
+				</div>
+			</div>
+			<div class="row recent_row">
+				<div class="col d-flex f-wrap-wrap " id="data">
+							{% for form in data %}
+							<!-- Property -->
+							<div class="col-xl-4 col-lg-6 property_col">
+								<div class="property">
+									<div class="property_image">
+										<input type="checkbox" class='button_radio' name="movies" value="{{ forloop.counter }}">
+										<img src="{% static 'images/property_10.jpg' %}" alt="" style="height: 500px" >
+										<div class="tag_featured property_tag"><a href="#">Featured</a></div>
+									</div>
+									<div class="property_body text-center d-flex wrap  ">
+										<div class="property_location"></div>
+										<div class="property_title" style="font-size: 20px;color:black; margin: auto;">{{ form.title }}</a></div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+					{% if data.has_other_pages %}
+					  <ul class="pagination">
+					    {% if data.has_previous %}
+					      <li><a id="prev" href="?page={{ data.previous_page_number }}">&laquo;</a></li>
+					    {% else %}
+					      <li class="disabled"><span>&laquo;</span></li>
+					    {% endif %}
+					    {% for i in data.paginator.page_range %}
+					      {% if data.number == i %}
+					        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+					      {% else %}
+					        <li><a href="?page={{ i }}">{{ i }}</a></li>
+					      {% endif %}
+					    {% endfor %}
+					    {% if data.has_next %}
+					      <li><a id="next" href="?page={{ data.next_page_number }}">&raquo;</a></li>
+					    {% else %}
+					      <li class="disabled"><span>&raquo;</span></li>
+					    {% endif %}
+					  </ul>
+					{% endif %}
+				</div>
+			</div>
+				<button class="buttons recent_button" style="margin-top:10px ;display: flex;
+    justify-content: center;color:white;font-size: 20px" id="EndofEverything">Add</button>
+		</div>
+	</div>
+	<!-- Realtors -->
+	
+	<div class="realtors">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title">The Author</div>
+					
+				</div>
+			</div>
+				<div style="display: flex;
+    flex-wrap: wrap;margin-top: 20px; ">
+				<!-- Realtor -->
+				<div class="col-lg-3 col-md-6">
+					<div class="realtor_outer">
+						<div class="realtor">
+							<div class="realtor_image"><img src="{% static 'images/autor1.jpg' %}" alt=""></div>
+							<div class="realtor_body">
+								<div class="realtor_title">Seilkhanov Kuanysh</div>
+								<div class="realtor_subtitle">Senior</div>
+							</div>
+							<div class="realtor_link"><a href="#">+</a></div>
+						</div>
+						<div class="realtor_link_background_container">
+							<div><div class="realtor_link_background"></div></div>
+						</div>
+					</div>
+				</div>
+				<!-- Realtor -->
+				<div class="col-lg-3 col-md-6">
+					<div class="realtor_outer">
+						<div class="realtor">
+							<div class="realtor_image"><img src="{% static 'images/author.jpg' %}" alt=""></div>
+							<div class="realtor_body">
+								<div class="realtor_title">Смагулова Дарига</div>
+								<div class="realtor_subtitle">Senior</div>
+							</div>
+							<div class="realtor_link"><a href="#">+</a></div>
+						</div>
+						<div class="realtor_link_background_container">
+							<div><div class="realtor_link_background"></div></div>
+						</div>
+					</div>
+				</div>
+				<!-- Realtor -->
+				<div class="col-lg-3 col-md-6">
+					<div class="realtor_outer">
+						<div class="realtor">
+							<div class="realtor_image"><img src="{% static 'images/realtor_1.jpg' %}" alt=""></div>
+							<div class="realtor_body">
+								<div class="realtor_title">Sanzhar Nussipbek</div>
+								<div class="realtor_subtitle">Senior</div>
+							</div>
+							<div class="realtor_link"><a href="#">+</a></div>
+						</div>
+						<div class="realtor_link_background_container">
+							<div><div class="realtor_link_background"></div></div>
+						</div>
+					</div>
+				</div>
+				<!-- Realtor -->
+				<div class="col-lg-3 col-md-6">
+					<div class="realtor_outer">
+						<div class="realtor">
+							<div class="realtor_image"><img src="{% static 'images/realtor_1.jpg' %}" alt=""></div>
+							<div class="realtor_body">
+								<div class="realtor_title">Камзанов Азат</div>
+								<div class="realtor_subtitle">Senior</div>
+							</div>
+							<div class="realtor_link"><a href="#">+</a></div>
+						</div>
+						<div class="realtor_link_background_container">
+							<div><div class="realtor_link_background"></div></div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Testimonials -->
+
+	<div class="testimonials">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title">What our clients say</div>
+				
+				</div>
+			</div>
+			<div class="row testimonials_row">
+				
+				<!-- Testimonial Item -->
+				<div class="col-lg-4 testimonial_col">
+					<div class="testimonial">
+						<div class="testimonial_title">Amazing site</div>
+						<div class="testimonial_text">This team make everything very good.I gived them maximum point. Good Luck in future </div>
+						<div class="testimonial_author_image"><img src="{% static 'images/client.jpg' %}" alt=""></div>
+						<div class="testimonial_author"><a href="#">Dinislam</a><span>, Client</span></div>
+						<div class="rating_r rating_r_5 testimonial_rating"><i></i><i></i><i></i><i></i><i></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/newsletter.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_content d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="newsletter_title_container">
+							<div class="newsletter_title">Do you want to help us?</div>
+							<div class="newsletter_subtitle">Помоги улучшить</div>
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" placeholder="Your e-mail address" required="required">
+								<button class="newsletter_button">subscribe now</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+		<div class="footer_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="footer_bar_content d-flex flex-row align-items-center justify-content-start">
+							<div class="cr"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</div>
+							<div class="footer_nav">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="#">About us</a></li>
+									<li><a href="properties.html">Properties</a></li>
+									<li><a href="news.html">News</a></li>
+									<li><a href="contact.html">Contact</a></li>
+								</ul>
+							</div>
+							<div class="footer_phone ml-auto"><span>call us: </span>652 345 3222 11</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script >
+	$('#EndofEverything').click(function(){
+		list=[];
+	    var rates = document.getElementsByClassName('button_radio');
+	 	$.each($("input[name='movies']:checked"), function(){            
+                list.push($(this).val());
+        });
+	    var myform = document.createElement('form');
+	 	var product = document.createElement('input');
+	 	product.value = list;
+	 	product.name = "res";
+	 	myform.action = "{% url  'model'  %}";
+	 	myform.method = "get";
+	 	myform.appendChild(product);
+	 	document.body.appendChild(myform);
+	 	myform.submit();
+	 	});
+</script>
+</body>
+</html>
